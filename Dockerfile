@@ -1,4 +1,4 @@
-FROM php:7.1.20-fpm-stretch
+FROM php:7.2-fpm
 
 MAINTAINER Ivan Klimchuk <ivan@klimchuk.com> (@alroniks)
 
@@ -25,6 +25,8 @@ RUN docker-php-ext-install pdo && \
     docker-php-ext-install opcache && \
     docker-php-ext-install zip && \
     docker-php-ext-install calendar && \
+    docker-php-ext-install sockets && \
+    docker-php-ext-install pcntl && \
     docker-php-ext-enable igbinary && \
     docker-php-ext-enable redis
 
@@ -40,8 +42,8 @@ RUN { \
 
 VOLUME /var/www/html
 
-ENV TAO_VERSION 3.1.0-RC7_build
-ENV TAO_SHA1 9d2de63a9a63538ae1ebe57b0d6023759cb08041
+ENV TAO_VERSION 3.2.0-RC2_build
+ENV TAO_SHA1 2e8f42f4ad07444c25b4b50a539aefdd83a5b5d1
 
 RUN curl -o tao.zip -SL http://releases.taotesting.com/TAO_${TAO_VERSION}.zip \
   && echo "$TAO_SHA1 *tao.zip" | sha1sum -c - \
